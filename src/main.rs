@@ -10,10 +10,10 @@ use crossterm::{
     terminal::{Clear, ClearType, EnterAlternateScreen, LeaveAlternateScreen},
     Result,
 };
-use std::io::*;
-use std::time::Duration;
 use std::fs::File;
+use std::io::*;
 use std::io::{BufRead, BufReader};
+use std::time::Duration;
 
 fn create_game_from_file(path: &str) -> game::World {
     let file = File::open(path).unwrap();
@@ -89,13 +89,13 @@ fn main() -> Result<()> {
     enable_raw_mode()?;
     let mut stdout = stdout();
     let mut game = match matches.value_of("INPUT") {
-    Some(path) => create_game_from_file(path),
-    None => {
-        let mut default_game = game::World::new(5, 5);
-        default_game.set_cells(&[(2, 1), (2, 2), (2, 3)]);
-        default_game
-    }
-};
+        Some(path) => create_game_from_file(path),
+        None => {
+            let mut default_game = game::World::new(5, 5);
+            default_game.set_cells(&[(2, 1), (2, 2), (2, 3)]);
+            default_game
+        }
+    };
     execute!(
         stdout,
         EnterAlternateScreen,
